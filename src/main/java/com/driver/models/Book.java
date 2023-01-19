@@ -20,7 +20,7 @@ public class Book {
 
     @ManyToOne
     @JoinColumn
-    @JsonIgnoreProperties("booksWritten")
+    @JsonIgnoreProperties("books")
     private Author author;
 
     @ManyToOne
@@ -32,12 +32,13 @@ public class Book {
     @Column(columnDefinition = "TINYINT(1)")
     private boolean available;
 
-    @OneToMany(mappedBy = "book", cascade = CascadeType.ALL)
+    @OneToMany(mappedBy = "book", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     @JsonIgnoreProperties("book")
     private List<Transaction> transactions;
 
     public Book() {
     }
+
     public Book(String name, Genre genre, Author author) {
         this.name = name;
         this.genre = genre;
@@ -102,4 +103,3 @@ public class Book {
     }
 
 }
-
