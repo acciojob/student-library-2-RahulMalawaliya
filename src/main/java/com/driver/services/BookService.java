@@ -20,26 +20,7 @@ public class BookService {
     AuthorRepository authorRepository1;
 
     public void createBook(Book book){
-
-
-        //Save the author in book
-
-        int authorId = book.getAuthor().getId();
-
-        Author author =  authorRepository1.findById(authorId).get();
-
-        //Update the bookList written by Author
-        author.getBooksWritten().add(book);
-
-        //Updated the book
-        book.setAuthor(author);
-        //bookRepository2.save(book);
         bookRepository2.save(book);
-
-        authorRepository1.save(author);
-
-
-
     }
 
     //This has to be rectified....and given a thought
