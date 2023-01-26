@@ -44,17 +44,17 @@ public class BookService {
 
     //This has to be rectified....and given a thought
 
-    public List<Book> getBooks(Genre genre, boolean available, String author){
+    public List<Book> getBooks(String genre, boolean available, String author){
 
-
-        if(genre != null && author != null){
-            return bookRepository2.findBooksByGenreAuthor(genre, author, available);
-        }else if(genre != null){
-            return bookRepository2.findBooksByGenre(genre, available);
-        }else if(author != null){
-            return bookRepository2.findBooksByAuthor(author, available);
-        }else{
+        if(genre == null && author == null)
             return bookRepository2.findByAvailability(available);
-        }
+
+        if(genre == null)
+            return bookRepository2.findBooksByAuthor(author, available);
+
+        if(author == null)
+            return bookRepository2.findBooksByGenre(genre, available);
+
+        return bookRepository2.findBooksByGenreAuthor(genre, author, available);
     }
 }

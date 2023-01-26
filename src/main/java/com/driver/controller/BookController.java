@@ -24,13 +24,13 @@ public class BookController {
     }
 
 
-    @GetMapping("/")
-    public ResponseEntity getBooks(@RequestParam(value = "genre", required = false) Genre genre,
-                                   @RequestParam(value = "available", required = false, defaultValue = "false") boolean available,
-                                   @RequestParam(value = "author", required = false) String author){
+    @GetMapping("/getBooks")
+    public ResponseEntity<List<Book>> getBooks(@RequestParam(value = "genre", required = false) String genre,
+                                               @RequestParam(value = "available", required = false, defaultValue = "false") boolean available,
+                                               @RequestParam(value = "author", required = false) String author){
 
+        //find the elements of the list by yourself
         List<Book> bookList = bookService.getBooks(genre, available, author);
-
         return new ResponseEntity<>(bookList, HttpStatus.OK);
 
     }
